@@ -1,0 +1,41 @@
+
+
+
+<div   class="container-fluid col-8" id="popup" >
+    <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()" >
+        <div class="form-group">
+            <label>
+              Name:
+            </label>
+              <input type="text" class="form-control" formControlName="username" required>
+            
+            <span *ngIf="editUserForm.get('username').touched && editUserForm.get('username').hasError('required')"> Enter Name</span>
+        </div>
+
+        <div class="form-group">
+          <label>
+            Email:
+        </label>
+            <input type="text"  class="form-control" formControlName="email" required>
+          
+          <span *ngIf="editUserForm.get('email').touched && editUserForm.get('email').hasError('required')"> Enter Email Address</span>
+          <span *ngIf="editUserForm.get('email').touched && editUserForm.get('email').hasError('email')"> Enter valid Email Address</span>
+      </div>
+      
+      <div class="form-group">
+          <label>
+            Password:
+        </label>
+            <input type="text"  class="form-control" formControlName="password" required>
+          
+          <span *ngIf="editUserForm.get('password').touched && editUserForm.get('password').hasError('required')">Enter Password</span>
+      </div>
+      <div class="form-group">
+        
+          <input type="text"  class="form-control" formControlName="id" hidden>
+        
+    </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!editUserForm.valid">Submit</button>
+          <!-- <button class="btn btn-danger ml-4" (click)="toggle()">Cancel</button> -->
+        </form>
+</div>

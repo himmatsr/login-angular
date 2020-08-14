@@ -1,0 +1,75 @@
+<!-- <p>profile id {{id}}</p> -->
+
+<div class="d-flex flex-row justify-content-around">
+    <div class="col-9" >
+<div id="user" class="flex-grow-1">
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let user of users; let i=index;">
+            <td>{{user.id}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td><button class="btn btn-primary" (click)="editUser(user.id)">Edit</button></td>
+        </tr>
+    </table>
+    <button class="btn btn-primary" (click)="addUser()">Add User</button>
+</div>
+</div>
+
+
+<div id="profile" >
+    <h3>Profile</h3>
+    <P>Id: {{profileId}}</P>
+    <P>Name: {{profileName}}</P>
+    <P>Email: {{profileEmail}}</P>
+</div>
+
+</div>
+
+<div  *ngIf="clicked" class="d-flex justify-content-center align-items-center bg-modal">
+
+<div   class="container-fluid col-8" id="popup">
+    <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label>
+              Name:
+            </label>
+              <input type="text" class="form-control" formControlName="username" required>
+            
+            <span *ngIf="addUserForm.get('username').touched && addUserForm.get('username').hasError('required')"> Enter Name</span>
+        </div>
+
+        <div class="form-group">
+          <label>
+            Email:
+        </label>
+            <input type="text"  class="form-control" formControlName="email" required>
+          
+          <span *ngIf="addUserForm.get('email').touched && addUserForm.get('email').hasError('required')"> Enter Email Address</span>
+          <span *ngIf="addUserForm.get('email').touched && addUserForm.get('email').hasError('email')"> Enter valid Email Address</span>
+      </div>
+      
+      <div class="form-group">
+          <label>
+            Password:
+        </label>
+            <input type="text"  class="form-control" formControlName="pwd" required>
+          
+          <span *ngIf="addUserForm.get('pwd').touched && addUserForm.get('pwd').hasError('required')">Enter Password</span>
+      </div>
+      <div class="form-group">
+        
+          <input type="text"  class="form-control" formControlName="id" hidden>
+        
+    </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!addUserForm.valid">Submit</button>
+          <button class="btn btn-danger ml-4" (click)="toggle()">Cancel</button>
+        </form>
+</div>
+
+</div>

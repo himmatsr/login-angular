@@ -1,0 +1,24 @@
+  
+  h2{
+      text-align: center;
+      margin: 20px;
+  }
+  #wrapper {
+    overflow-x: hidden;
+    /* border: 5px soild red; */
+ }
+
+  #sidebar-wrapper{
+      min-height: 100vh;
+      min-width: 15%;
+      max-width: 15%;
+      transition: 0.5s;
+  }
+
+  .testclass{
+      margin-left: -15rem;
+  }
+
+  .mainpage{
+      margin-left: 50px;
+  }

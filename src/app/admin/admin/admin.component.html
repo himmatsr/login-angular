@@ -1,0 +1,30 @@
+<!-- <p>admin works!</p> -->
+<!-- <h2>Dasboard</h2> -->
+<!-- <a routerLink="edit/1">edit</a>
+<a routerLink="userdata">userdata</a>
+<a routerLink="userprofile/1">userprofile</a> -->
+
+
+<div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="btn btn-primary" id="menu-toggle" (click)="toggleFunc()">Toggle Menu</button>
+      </nav>
+
+<div class="d-flex wrapper">
+<!--sidebar-->
+<div class="bg-dark border-right" id="sidebar-wrapper" [class]= "istoggle ? 'testclass' : ''">
+    
+      <a [routerLink]= "['userprofile/',profileId ]"  class="list-group-item list-group-item-action bg-dark text-light">Profile</a>
+      <a [routerLink]="['userdata']" class="list-group-item list-group-item-action bg-dark text-light">Users</a>
+      
+</div>
+
+<!--mainpage-->
+<div class="mainpage flex-grow-1" >
+
+    <router-outlet></router-outlet>
+
+</div>
+</div>
+</div>
+
