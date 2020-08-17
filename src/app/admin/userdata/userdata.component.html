@@ -17,7 +17,7 @@
             <td>{{user.email}}</td>
             <td><button class="btn btn-primary" (click)="editUser(user.id)">Edit</button></td>
             <td><button class="btn btn-primary" (click)="deleteUser(user.id)">Delete</button></td>
-            <td><input type="checkbox" class ="checkbox" ></td>
+            <!-- <td><input type="checkbox" class ="checkbox" ></td> -->
         </tr>
     </table>
     <button class="btn btn-primary" (click)="addUser()">Add User</button>
@@ -65,7 +65,7 @@
               <input type="text"  class="form-control" formControlName="id" hidden>
             
         </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary"  [disabled]="!addUserForm.valid">Submit</button>
               <button class="btn btn-danger ml-4" (click)="toggle()">Cancel</button>
             </form>
     </div>

@@ -4,10 +4,17 @@ import { Injectable, EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class LoginService {
-  loginDataSource = new EventEmitter();
+  loginData = new EventEmitter();
+
+
   constructor() { }
-  sendData(data: number){
-    this.loginDataSource.emit(data);
+
+
+  sendLoginData(){
+    console.log("Login Service");
+    // console.log(val);
+    var item = "himmat";
+    this.loginData.emit(item);
   }
 
 

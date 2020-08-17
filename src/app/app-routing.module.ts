@@ -5,7 +5,7 @@ import {ProfileComponent} from './profile/profile.component'
 const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'profile/:id',component:ProfileComponent},
-  {path: 'admin/:id',
+  {path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
   {path:'', redirectTo:'login', pathMatch:'full'}
 ];

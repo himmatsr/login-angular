@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserInfoService} from '../user-info.service';
-
+// import {LoginService} from './login.service'
 import { FormBuilder, Validators } from '@angular/forms';
+import {InteractionService} from '../interaction.service'
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -10,10 +11,21 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor( private _userInfoService : UserInfoService, private fb : FormBuilder, private router: Router) { }
+  constructor( private _userInfoService : UserInfoService, 
+    private fb : FormBuilder, 
+    private router: Router,
+    private _interactionService : InteractionService,
+    // private _loginService : LoginService,
+    ) { }
+
+
+
   ngOnInit(): void {
   }
+
+
   notUser=false;
+
   profileForm = this.fb.group({
     email: ['',[Validators.required, Validators.email]],
     pwd: ['', Validators.required]
@@ -27,7 +39,11 @@ export class LoginComponent implements OnInit {
     for(let obj of resp){
       if(obj.email === formData.email && obj.password === formData.pwd){
         let id = obj.id;
-        this.router.navigate(['admin',id]);
+        this._interactionService.loginAuth = id;
+        // this._loginService.sendLoginData(); // sending authentic userdata from here and admin will receive it
+        // this._interactionService.sendData(obj);
+
+        this.router.navigate(['admin/userprofile',id]);
         
         // console.log('valid User');
         // console.log(obj);
@@ -37,6 +53,7 @@ export class LoginComponent implements OnInit {
         break;
       }
     }
+
     if(flag === false){
       this.notUser=true;
     }

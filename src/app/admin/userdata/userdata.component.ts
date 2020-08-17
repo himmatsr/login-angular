@@ -23,9 +23,14 @@ export class UserdataComponent implements OnInit {
     console.log("formed again bro");
     this._interaction.loginDataSource.subscribe(data => {
       if(data !== undefined){
-        this.users[data.id-1].email = data.email;
-        this.users[data.id-1].username = data.username;
-        this.users[data.id-1].password = data.password;
+        for(let obj in this.users){
+          if(this.users[obj].id === data.id){
+            this.users[obj].email = data.email;
+            this.users[obj].username = data.username;
+            this.users[obj].password = data.password;
+          }
+        }
+        
       }
     })
 
@@ -46,7 +51,7 @@ export class UserdataComponent implements OnInit {
     id:[]
   });
   editUser(id: number){
-
+    console.log(id);
     this.router.navigate(['../edit',id], {relativeTo: this.route});
     // this.clicked = true;
     // let editValue = this.users[id-1];
@@ -54,8 +59,14 @@ export class UserdataComponent implements OnInit {
   }
   addUser(){
     this.clicked = true;
+    let maxId= 0;
+    for(let obj of this.users){
+      if(obj.id > maxId){
+        maxId = obj.id;
+      }
+    }
     // this.addUserForm.patchValue({id: });
-    this.addUserForm.setValue({username: '', email: '', password: '', id: this.users.length+1});
+    this.addUserForm.setValue({username: '', email: '', password: '', id: maxId+1});
     console.log(this.addUserForm.value);
   }
 

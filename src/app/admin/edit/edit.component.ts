@@ -18,15 +18,42 @@ export class EditComponent implements OnInit {
     private route: ActivatedRoute,
     private userInfoService : UserInfoService,  
     private fb : FormBuilder,
-    private _interaction: InteractionService) { }
+    private _interaction: InteractionService) {
 
+    
 
-  users = this.userInfoService.getUserData();
-  profileId = parseInt(this.route.snapshot.paramMap.get('id'));
-  profileName = this.users[this.profileId-1].username;
-  profileEmail = this.users[this.profileId-1].email;
-  profilepwd = this.users[this.profileId-1].password;
+     }
+     users = this.userInfoService.getUserData();
+     profileId = parseInt(this.route.snapshot.paramMap.get('id'));
+     profId : number;
+ 
+     profileName ='';
+     profileEmail ='';
+     profilepwd ='';
 
+    
+
+    ngOnInit(): void {
+      console.log("test ngoninit for id")
+    for(let obj of this.users){
+      if(obj.id === this.profileId){
+        console.log(obj);
+        this.profId = obj.id;
+        this.profileName = obj.username;
+        this.profilepwd = obj.password;
+        this.profileEmail = obj.email;
+        this.editUserForm.setValue({
+          username: this.profileName, 
+          email : this.profileEmail, 
+          password: this.profilepwd, 
+          id : this.profileId
+        });
+        break;
+      }
+    }
+    }
+  
+    
   
 
   editUserForm = this.fb.group({
@@ -35,7 +62,6 @@ export class EditComponent implements OnInit {
     password:[this.profilepwd , Validators.required],
     id:[this.profileId]
   });
-
 
   // pushValue(){
   //   this.editUserForm.setValue({
@@ -56,8 +82,11 @@ export class EditComponent implements OnInit {
 
   
 
-  ngOnInit(): void {
-  }
+  
+
+  
 
 
 }
+
+
