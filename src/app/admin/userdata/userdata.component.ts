@@ -3,6 +3,7 @@ import {UserInfoService} from 'src/app/user-info.service';
 import {InteractionService} from 'src/app/interaction.service'
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 @Component({
   selector: 'app-userdata',
   templateUrl: './userdata.component.html',
@@ -15,11 +16,17 @@ export class UserdataComponent implements OnInit {
     private fb: FormBuilder, 
     private router: Router, 
     private route: ActivatedRoute,
-    private _interaction : InteractionService) { }
+    private _interaction : InteractionService) {
+      console.log("inside constructor", this.users);
 
+      //  = this.userInfoService.getUserData();
+     }
+
+    //  test = 2;
 
 
     ngOnInit(): void {
+    console.log("inside ngOnInit",this.users);
     console.log("formed again bro");
     this._interaction.loginDataSource.subscribe(data => {
       if(data !== undefined){
@@ -50,6 +57,8 @@ export class UserdataComponent implements OnInit {
     password:['',Validators.required],
     id:[]
   });
+
+
   editUser(id: number){
     console.log(id);
     this.router.navigate(['../edit',id], {relativeTo: this.route});
@@ -88,18 +97,29 @@ export class UserdataComponent implements OnInit {
     console.log(id);
       console.log(this.users);
       
-      for(let i=0; i<this.users.length ;i++){
-        if(this.users[i].id == id){
-          this.users.splice(i,1);
-          break;
-        } 
-      }
+      // for(let i=0; i<this.users.length ;i++){
+      //   if(this.users[i].id == id){
+      //     this.users.splice(i,1);
+      //     break;
+      //   } 
+      // }
+      this.users = this.userInfoService.removeUserData(id);
       console.log(this.users);
 
   }
 
   bulkDelete(){
-    this.users.splice(0,this.users.length);
+    const check = document.getElementsByClassName('check') as unknown as HTMLInputElement;
+    console.log(check);
+    let arr = [];
+    for (let obj in check){
+      if(check[obj].checked === false){
+        arr.push(this.users[obj].id);
+      }
+    }
+    this.users = this.userInfoService.bulkRemoveUserData(arr);
+
+    console.log(arr);
   }
 
 

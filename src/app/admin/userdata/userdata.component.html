@@ -17,7 +17,7 @@
             <td>{{user.email}}</td>
             <td><button class="btn btn-primary" (click)="editUser(user.id)">Edit</button></td>
             <td><button class="btn btn-primary" (click)="deleteUser(user.id)">Delete</button></td>
-            <!-- <td><input type="checkbox" class ="checkbox" ></td> -->
+            <td><input type="checkbox" class ="check" [value]="i" ></td>
         </tr>
     </table>
     <button class="btn btn-primary" (click)="addUser()">Add User</button>

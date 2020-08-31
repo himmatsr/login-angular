@@ -30,5 +30,36 @@ export class UserInfoService {
     }
     return this.userdata;
   }
+
+
+
+  removeUserData(removeId){
+    for(let i in this.userdata){
+      if(this.userdata[i].id == removeId){
+        this.userdata.splice(parseInt(i),1);
+      }
+    }
+    return this.userdata;
+  }
+
+  bulkRemoveUserData(arr){
+    let tempuserdata = [];
+    for(let i in this.userdata){
+      for(let j in arr){
+        if(this.userdata[i].id == arr[j]){
+          tempuserdata.push(this.userdata[i]);
+        }
+      }
+    }
+    console.log("Inside Service - bulkRemoveUserData", tempuserdata);
+
+    this.userdata = tempuserdata;
+    return this.userdata;
+  }
+
+
+
 }
+
+
 

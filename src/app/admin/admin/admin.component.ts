@@ -36,8 +36,9 @@ export class AdminComponent implements OnInit {
     //   console.log("Admin got Id through userprofile", data);
     //   this.profileId = data;
     // })
-
+    console.log("inside Admin component - gnOninit")
     this.profileId = this._interactionService.loginAuth;
+    console.log(this.profileId);
 
 
 

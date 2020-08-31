@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {UserInfoService} from 'src/app/user-info.service'
+import {UserInfoService} from 'src/app/user-info.service';
+import {InteractionService} from 'src/app/interaction.service'
 // import { InteractionService } from 'src/app/interaction.service';
 @Component({
   selector: 'app-userprofile',
@@ -12,11 +13,12 @@ export class UserprofileComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, 
     private userInfoService : UserInfoService, 
-    // private _interactionService : InteractionService
+    private interactionService : InteractionService
     ) { }
 
   users = this.userInfoService.getUserData();
   profileId = parseInt(this.route.snapshot.paramMap.get('id'));
+
   profileName : string;
   // = this.users[this.profileId-1].username;
   profileEmail : string;
@@ -25,6 +27,7 @@ export class UserprofileComponent implements OnInit {
   ngOnInit(): void {
     console.log("Inside User Profile")
     console.log(this.users);
+    
     // this._interactionService.sendprofile(this.profileId);
     for(let obj of this.users){
       if(obj.id === this.profileId){
@@ -32,6 +35,9 @@ export class UserprofileComponent implements OnInit {
         this.profileName = obj.username;
       }
     }
+    console.log(this.profileId);
+    this.interactionService.loginAuth = this.profileId;
+    
   
   }
   
